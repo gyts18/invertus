@@ -1,0 +1,11 @@
+{
+  "require": {
+    "predis/predis": "^1.1",
+    "parsecsv/php-parsecsv": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Project\\": "src/"
+    }
+  }
+}

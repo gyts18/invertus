@@ -1,0 +1,5 @@
+version: '2'
+syncs:
+  bigcake:
+    src: ${APP_PATH}
+    sync_excludes: ['.data/']
