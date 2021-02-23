@@ -18,6 +18,13 @@ class ProductFactory
         'quantity' => true,
     ];
 
+    private CurrencyService $currencyService;
+
+    public function __construct()
+    {
+        $this->currencyService = new CurrencyService(new CurrencyProvider());
+    }
+
     public function create(array $data): Product
     {
         $this->validateData($data);
@@ -48,6 +55,6 @@ class ProductFactory
 
     private function checkIfCurrencyIsAvailable(string $currency): bool
     {
-        return (new CurrencyService(new CurrencyProvider()))->checkIfCurrencyIsAvailable($currency);
+        return $this->currencyService->checkIfCurrencyIsAvailable($currency);
     }
 }

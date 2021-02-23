@@ -2,7 +2,9 @@
 
 namespace Project\Factory\Exception;
 
-class MissingFieldException extends \Exception
+use Exception;
+
+class MissingFieldException extends Exception
 {
 
 }
