@@ -6,7 +6,7 @@
  
  To save time (I've written comments, on how some functionality should play out in real work scenarios) and just did a mock up.
 
- #How to run it
+ # How to run it
  
  - Clone project
  - run sudo ./start-dev.sh, make sure you have docker-compose and docker installed. Keep in mind I'm using my boilerplate Dockerfile, so it's larger than usual.
@@ -17,7 +17,7 @@ To change default currency and add others, make according changes in CurrencyPro
 
 To change values public/files.txt is available for changes, please make sure that the first line is an empty string, unless you want your cart to have one item short from the top (library parsing bug, I think atleast), I could've written my own parser, but just picking a simple library was more logical.
  
- ##What's used
+ ## What's used
  - Redis for saving final cart and getting.
  - PHP 7.4
  - Docker
