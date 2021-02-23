@@ -4,7 +4,7 @@
  
  This is actually the first time i've written in pure php, so that experience was quite pleasing
  
- To save time (I've written comments, on how some functionality should play out in real work scenarios) and just did a mock up.
+ To save time (I've written comments, on how some functionality should play out in real life scenarios) and just did a mock up.
 
  # How to run it
  
