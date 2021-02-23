@@ -27,12 +27,12 @@ class CartService implements CartServiceInterface
         $this->clientCart->removeProductFromCart($product);
     }
 
-    public function getClientCartTotal(): void
+    public function getClientCartTotal(): string
     {
-        echo 'Cart price is: ' . $this->clientCart->getCartTotalSum() . CurrencyProvider::DEFAULT_CURRENCY . PHP_EOL;
+        return 'Cart price is: ' . $this->clientCart->getCartTotalSum() . CurrencyProvider::DEFAULT_CURRENCY . PHP_EOL;
     }
 
-    public function saveCart(): void
+    public function saveCart(): string
     {
         $cacheClient = new RedisClient();
 
@@ -42,6 +42,6 @@ class CartService implements CartServiceInterface
 
         $cacheClient->save($this->clientCart->getId(), $this->clientCart->getCart());
 
-        echo 'Cart successfully saved, the cached result is: ' . $cacheClient->getByKey($this->clientCart->getId()) . PHP_EOL;
+        return 'Cart successfully saved, the cached result is: ' . $cacheClient->getByKey($this->clientCart->getId()) . PHP_EOL;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Project\Entity;
 
-use Project\Entity\Exception\RemoveFromEmptyCartException;
+use Project\Entity\Exception\RemoveFromNonExistingProductException;
 use Project\Provider\CurrencyProvider;
 use Project\Service\CurrencyService;
 
@@ -14,7 +14,7 @@ class ClientCart
     public function __construct()
     {
         //random id generator for now.
-        $this->id = rand(1,10000);
+        $this->id = rand(1, 10000);
         $this->createCartStructure();
     }
 
@@ -33,7 +33,7 @@ class ClientCart
         $key = $this->getProductKeyIfExists($product->getId());
 
         if (!is_null($key)) {
-           $this->cart['products'][$key] = $product->toArray();
+            $this->cart['products'][$key] = $product->toArray();
         } else {
             $this->cart['products'][] = $product->toArray();
         }
@@ -48,7 +48,7 @@ class ClientCart
         if (!is_null($key)) {
             unset($this->cart['products'][$key]);
         } else {
-            throw new RemoveFromEmptyCartException('The provided product to remove does not exist. Ignoring action');
+            throw new RemoveFromNonExistingProductException('The provided product to remove does not exist. Ignoring action');
         }
 
         $this->calculateTotalPrice();
@@ -68,7 +68,6 @@ class ClientCart
         ];
     }
 
-
     private function getProductKeyIfExists(string $id): ?int
     {
         foreach ($this->cart['products'] as $key => $product) {
@@ -86,11 +85,11 @@ class ClientCart
         $totalPrice = 0;
 
         foreach ($this->cart['products'] as $product) {
-            $totalPrice += $currencyService->getConvertedPrice($product['price'], $product['currency']) * $product['quantity'];
+            $totalPrice += $currencyService->getConvertedPrice($product['price'],
+                    $product['currency']) * $product['quantity'];
         }
 
         $this->cart['total_price'] = $totalPrice;
     }
-
 
 }

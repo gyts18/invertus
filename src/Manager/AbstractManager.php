@@ -7,5 +7,5 @@ namespace Project\Manager;
  */
 abstract class AbstractManager
 {
-    abstract protected function processProducts();
+    abstract protected function processProducts(): void;
 }

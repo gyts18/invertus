@@ -4,7 +4,7 @@ namespace Project\Entity\Exception;
 
 use Exception;
 
-class RemoveFromEmptyCartException extends Exception
+class RemoveFromNonExistingProductException extends Exception
 {
 
 }

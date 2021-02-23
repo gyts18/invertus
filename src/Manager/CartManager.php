@@ -8,21 +8,22 @@ use Project\Service\CartServiceInterface;
 
 class CartManager extends AbstractManager
 {
-    private $cartService;
+    private CartServiceInterface $cartService;
+    private ProductFactory $productFactory;
 
     public function __construct(CartServiceInterface $cartService)
     {
         $this->cartService = $cartService;
+        $this->productFactory = new ProductFactory();
     }
 
-    public function processProducts()
+    public function processProducts(): void
     {
         $data = CsvToArrayTransformer::transformFileToArray();
-        $productFactory = new ProductFactory();
 
         foreach ($data as $entry) {
             try {
-                $product = $productFactory->create($entry);
+                $product = $this->productFactory->create($entry);
 
                 if ($product->checkIfProductIsBeingAdded()) {
                     $this->cartService->addToCart($product);
@@ -30,13 +31,13 @@ class CartManager extends AbstractManager
                     $this->cartService->removeFromCart($product);
                 }
 
-                $this->cartService->getClientCartTotal();
+                print_r($this->cartService->getClientCartTotal());
             } catch (\Exception $exception) {
-                echo $exception->getMessage() . PHP_EOL;
+                print_r($exception->getMessage() . PHP_EOL);
                 continue;
             }
         }
 
-        $this->cartService->saveCart();
+        print_r($this->cartService->saveCart());
     }
 }

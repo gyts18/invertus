@@ -8,6 +8,6 @@ interface CartServiceInterface
 {
     public function addToCart(Product $product);
     public function removeFromCart(Product $product);
-    public function getClientCartTotal(): void;
-    public function saveCart(): void;
+    public function getClientCartTotal(): string;
+    public function saveCart(): string;
 }

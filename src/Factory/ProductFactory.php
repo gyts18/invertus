@@ -3,7 +3,6 @@
 namespace Project\Factory;
 
 use Project\Entity\Product;
-use Project\Factory\Exception\EmptyProductException;
 use Project\Factory\Exception\MissingFieldException;
 use Project\Factory\Exception\NonEnabledCurrencyException;
 use Project\Provider\CurrencyProvider;
@@ -19,7 +18,7 @@ class ProductFactory
         'quantity' => true,
     ];
 
-    public function create (array $data): Product
+    public function create(array $data): Product
     {
         $this->validateData($data);
 
@@ -33,7 +32,7 @@ class ProductFactory
         return $product;
     }
 
-    private function validateData(array $data): bool
+    private function validateData(array $data): void
     {
         foreach ($data as $key => $datum) {
             // 0 quantity counts too, which makes sense
@@ -45,8 +44,6 @@ class ProductFactory
                 throw new NonEnabledCurrencyException('The provided currency: ' . $datum . ' is not enabled by the system, skipping the product add to cart process');
             }
         }
-
-        return true;
     }
 
     private function checkIfCurrencyIsAvailable(string $currency): bool
